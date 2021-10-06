@@ -4,23 +4,30 @@ const minusDOM = formDOM.querySelector('.minus');
 const plusDOM = formDOM.querySelector('.plus');
 const numberDOM = formDOM.querySelector('.number');
 const h1DOM = document.querySelector('h1');
+const ulDOM = document.querySelector('ul');
 
-const playText = 'Žaidimas progrese!';
 const h1DefaultText = h1DOM.innerText;
 let counter = 0;
 
+ulDOM.innerHTML = '<li>Tu pasileidai zaidima - sekmes!</li>';
+
+function contentUpdate(btnType, h1Text = 'Žaidimas progrese!') {
+    numberDOM.innerText = counter;
+    h1DOM.innerText = h1Text;
+    ulDOM.innerHTML += `<li>Paspaudei ${btnType} ir dabartinis rezultatas yra ${counter}.</li>`;
+}
+
 minusDOM.addEventListener('click', function () {
-    numberDOM.innerText = --counter;
-    h1DOM.innerText = playText;
+    --counter;
+    contentUpdate('minusa');
 });
 
 plusDOM.addEventListener('click', function () {
-    numberDOM.innerText = ++counter;
-    h1DOM.innerText = playText;
+    ++counter;
+    contentUpdate('pliusa');
 });
 
 resetDOM.addEventListener('click', function () {
     counter = 0;
-    numberDOM.innerText = counter;
-    h1DOM.innerText = h1DefaultText;
+    contentUpdate('reset', h1DefaultText);
 });
